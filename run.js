@@ -1,5 +1,5 @@
- // Function to get IP address using ipify
- async function getIPAddress() {
+// Function to get IP address using ipify
+async function getIPAddress() {
     try {
         const response = await fetch('https://api.ipify.org?format=json');
         const data = await response.json();
@@ -25,6 +25,7 @@ async function getIPLocation(ip) {
 // Initialize the map
 let map;
 let marker;
+let circle;
 
 function initMap(lat, lon) {
     map = L.map('map').setView([lat, lon], 13);
@@ -35,12 +36,20 @@ function initMap(lat, lon) {
     marker = L.marker([lat, lon]).addTo(map)
         .bindPopup('You are here!')
         .openPopup();
+
+    circle = L.circle([lat, lon], {
+        color: 'blue',
+        fillColor: '#30f',
+        fillOpacity: 0.2,
+        radius: 200 // Radius in meters
+    }).addTo(map);
 }
 
 // Update the map with a new location
 function updateMap(lat, lon, locationInfo) {
     map.setView([lat, lon], 13);
     marker.setLatLng([lat, lon]).setPopupContent(locationInfo).openPopup();
+    circle.setLatLng([lat, lon]);
 }
 
 // Search for IP location
@@ -76,10 +85,3 @@ async function searchIP() {
         document.getElementById('info').innerText = 'Could not fetch IP address.';
     }
 })();
-
-
-//  ====>
-//  https://www.openstreetmap.org/
-//  https://leafletjs.com/
-//  https://www.ipify.org/
-

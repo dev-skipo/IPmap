@@ -1,3 +1,31 @@
+ /* Ensure the map takes the full viewport */
+ html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 #map {
-    height: 500px;
+    height: 100%;
+    width: 100%;
+}
+/* Position the info and controls divs */
+#info, #controls {
+    background: white;
+    padding: 10px;
+    z-index: 1000;
+}
+#info {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+#controls {
+    position: absolute;
+    top: 70px;
+    left: 10px;
+}
+/* Move the zoom control to the top right corner */
+.leaflet-top.leaflet-left {
+    left: auto;
+    right: 10px;
 }
